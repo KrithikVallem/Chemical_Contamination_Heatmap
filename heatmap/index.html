@@ -19,18 +19,14 @@
       // Moving this code into here so that heatmap.js only contains actual heatmap-generating functions
       // and not stuff to run the temporary button/dialog-based selector
       import { chemicals_data } from "./json_data_files/chemicals_data.js";
-      import { get_heatmap_colors, make_heatmap } from "./heatmap.js"
+      import { make_heatmap } from "./heatmap.js";
 
-      main(chemicals_data);
-
-      function main(chemicals_data) {
-        // add event listeners and stuff here later for actual dropdown
-        const select_btn = document.querySelector("#select_btn");
-        select_btn.onclick = () => {
-          const [chemical_name, year] = get_new_chemical_or_year(chemicals_data);
-          const styles_json = get_heatmap_colors(chemicals_data, chemical_name, year);
-          make_heatmap(styles_json, chemical_name, year);
-        }
+      
+      // add event listeners and stuff here later for actual dropdown
+      const select_btn = document.querySelector("#select_btn");
+      select_btn.onclick = () => {
+        const [chemical_name, year] = get_new_chemical_or_year(chemicals_data);
+        make_heatmap(chemical_name, year);
       }
 
       // this is currently just a simple number selection because I'm lazy,

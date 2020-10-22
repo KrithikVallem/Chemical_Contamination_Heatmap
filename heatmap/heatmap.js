@@ -16,7 +16,9 @@ const CONSTANTS = {
 // if you want to display data for a new chemical or year, modify the styles_json that is passed in
 // the chemical_name and year are only passed in here to make the heatmap title, they won't change the heatmap's data
 // you need to pass the new chemical_name and year into the get_heatmap_colors function to change the actual heatmap
-export function make_heatmap(styles_json, chemical_name, year) {
+export function make_heatmap(chemical_name, year) {
+  const styles_json = get_heatmap_colors(chemicals_data, chemical_name, year);
+
   zingchart.maps.loadGeoJSON({
     id: 'michigan_zipcodes', // Give the map an id
     url: CONSTANTS.geojson_path,
