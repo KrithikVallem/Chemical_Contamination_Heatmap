@@ -4,7 +4,7 @@
 // the chemicals_data_path should also be a variable, but import doesn't allow variables so it'll be hardcoded here
 import { chemicals_data } from "./json_data_files/chemicals_data.js";
 const CONSTANTS = {
-  geojson_path: "./json_data_files/simplified_michigan_zipcodes_3_pct.geo.json",
+  geojson_path: "./heatmap/json_data_files/simplified_michigan_zipcodes_3_pct.geo.json",
   colors: { // any css-compatible colors work here, but the chroma color scales can be found at https://colorbrewer2.org/
     lowest: chroma.brewer.PuRd[0], // used for default map background (0 contaminants found)
     highest: chroma.brewer.PuRd[chroma.brewer.PuRd.length - 1], // used for the highest contaminant amount across all zipcodes
@@ -16,12 +16,13 @@ const CONSTANTS = {
 // if you want to display data for a new chemical or year, modify the styles_json that is passed in
 // the chemical_name and year are only passed in here to make the heatmap title, they won't change the heatmap's data
 // you need to pass the new chemical_name and year into the get_heatmap_colors function to change the actual heatmap
-export function make_heatmap(chemical_name, year) {
+// added an optional geojson_path parameter so html files not in the main global folder (which will thus have different paths for the geojson) can still use make_heatmap
+export function make_heatmap(chemical_name, year, geojson_path = CONSTANTS.geojson_path) {
   const styles_json = get_heatmap_colors(chemicals_data, chemical_name, year);
 
   zingchart.maps.loadGeoJSON({
     id: 'michigan_zipcodes', // Give the map an id
-    url: CONSTANTS.geojson_path,
+    url: geojson_path,
     mappings: { //Recommended. Allows you to property names from the GeoJSON file to ZingChart.
       id: 'ZCTA5CE10', // zip code property name in the geojson
       name: 'ZCTA5CE10',

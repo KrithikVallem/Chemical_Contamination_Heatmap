@@ -26,7 +26,7 @@
       const select_btn = document.querySelector("#select_btn");
       select_btn.onclick = () => {
         const [chemical_name, year] = get_new_chemical_or_year(chemicals_data);
-        make_heatmap(chemical_name, year);
+        make_heatmap(chemical_name, year, "./json_data_files/simplified_michigan_zipcodes_3_pct.geo.json");
       }
 
       // this is currently just a simple number selection because I'm lazy,
