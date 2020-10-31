@@ -6,7 +6,7 @@
 // 3: substitute new geojson for old geojson, and heatmap will automatically update itself
 
 // folder with the csv's - change this if the folder name changes
-const folder_name = "chem_files";
+const folder_name = `${__dirname}/chem_files`;
 
 const fs = require('fs');
 const parse = require('csv-parse/lib/sync');
@@ -15,7 +15,13 @@ main()
 
 async function main() {
     const chemicals_json = await make_chemicals_json();
-    console.log(JSON.stringify(chemicals_json))
+    const zipcodes_json = make_zipcodes_json(chemicals_json);
+    
+    // replace the json object being printed here so the output file has what you want
+    console.log( JSON.stringify(
+        chemicals_json
+        //zipcodes_json
+    ));
 }
 
 async function make_chemicals_json() {
@@ -52,9 +58,36 @@ async function make_chemicals_json() {
                 AnalyticalResultValue: value
             } = row;
 
-            chemicals_json[chemical_name][year][zipcode] = value;
+            chemicals_json[chemical_name][year][zipcode] = parseFloat(value);
         })
     }
 
     return chemicals_json;
+}
+
+function make_zipcodes_json(chemicals_json) {
+    const zipcodes_json = {};
+
+    for (const chemical in chemicals_json) {
+        const data_for_chemical = chemicals_json[chemical];
+
+        for (const year in data_for_chemical) {
+            const data_for_chemical_in_year = data_for_chemical[year];
+
+            for (const zipcode in data_for_chemical_in_year) {
+                // initialize zipcodes_json in case this is the first loop iteration
+                // where a particular zipcode or year for a zipcode is seen
+                if (zipcode in zipcodes_json === false) {
+                    zipcodes_json[zipcode] = {};
+                }
+                if (year in zipcodes_json[zipcode] === false) {
+                    zipcodes_json[zipcode][year] = {};
+                }
+
+                zipcodes_json[zipcode][year][chemical] = data_for_chemical_in_year[zipcode];
+            }
+        }
+    }
+
+    return zipcodes_json;
 }
