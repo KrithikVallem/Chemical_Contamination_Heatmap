@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css" integrity="sha512-ZRv40llEogRmoWgZwnsqke3HNzJ0kiI0+pcMgiz2bxO6Ew1DVBtWjVn0qjrXdT3+u+pSN36gLgmJiiQ3cQtyzA==" crossorigin="anonymous" />
+  </head>
+  <body>
+<!---Navigation--->
+    <div id="header" style="background-color: blue;">
+    	<div id="center_hdr" style="background-color: yellow;">
+        <h1>Header</h1>
+      </div>
+    </div>
+    
+<!---Content Begin--->
+    <div id="not-header" class="columns">
+      <div id="left-container" class="column">
+        
+        <!-- Controls -->
+        <div id="controls" style="background-color: green;">
+          <h1>Controls</h1>
+          
+          <label for="chemical-name-selector">Choose a chemical!</label>
+          <select name="chemical-name-selector">
+            <option selected disabled>---</option>
+            <option> Chemical 1 </option>
+          </select>
+          
+          <label for="chemical-year-selector">Choose a year!</label>
+          <select name="chemical-year-selector">
+            <option selected disabled>---</option>
+            <option> Year 1 </option>
+          </select>
+          <button>Generate Heatmap!</button>
+          
+          <input class="input is-small" type="text" placeholder="Input Zipcode">
+          
+          <button id="button">Get Data for your zipcode!</button>
+        </div>
+        
+        <!-- Information -->
+        <div id="infobox" style="background-color: lightblue;">
+          <h1>Infobox</h1>
+          <div>Stuff about chemical goes here</div>
+          
+          <textarea class="textarea" placeholder="10 lines of textarea" rows="10"></textarea>
+
+
+        </div>
+      </div>
+      <div id="right-container" class="column" style="background-color: red;">
+        
+        <!--- Map --->
+        <div id="heatmap">
+          <h1>Map</h1>
+        </div>
+      </div>
+    </div>  
+  </body>
+</html>
