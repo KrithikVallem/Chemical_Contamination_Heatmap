@@ -1,301 +1,65 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html>
   <head>
-    <title> Michigan Chemical Heatmap </title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Chemical Contamination Heatmap</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+
+    <!--mini.css, for layout purposes-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css"
+    />
+
+    <!--Zingchart, for making the map and doing the heavy lifting-->
     <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
     <script src="https://cdn.zingchart.com/modules/zingchart-maps.min.js"></script>
     <script src="https://cdn.zingchart.com/modules/zingchart-maps-geojson.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.0/chroma.min.js" integrity="sha512-yocoLferfPbcwpCMr8v/B0AB4SWpJlouBwgE0D3ZHaiP1nuu5djZclFEIj9znuqghaZ3tdCMRrreLoM8km+jIQ==" crossorigin="anonymous"></script>
+
+    <!--Chroma.js, for creating appropriate colors for the data values-->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.0/chroma.min.js"
+      integrity="sha512-yocoLferfPbcwpCMr8v/B0AB4SWpJlouBwgE0D3ZHaiP1nuu5djZclFEIj9znuqghaZ3tdCMRrreLoM8km+jIQ=="
+      crossorigin="anonymous"
+    ></script>
   </head>
 
   <body>
-    <div class="navbar">
-      <nav>
-        <ul>
-          <li><a href="https://github.com/UMEcoData/Michigan-Chemical-Contamination-Heatmaps">Home</a></li>
-          <li><a href="https://github.com/UMEcoData/Michigan-Chemical-Contamination-Heatmaps">EcoData Github</a></li>
-          <li><a href="index.html">Chemical Heatmap</a></li>
-          <li><a href="https://github.com/UMEcoData/Michigan-Chemical-Contamination-Heatmaps">Journal</a></li>
-          <li><a href="https://github.com/UMEcoData/Michigan-Chemical-Contamination-Heatmaps">Synthesizer</a></li>
-<!--Links for Home, Journal, Synthesizer are placeholders, need to be changed --> 
-<!---Other parts of NavBar can be taken from general website (mobile)--->
-        </ul>
-    	</nav>
-<!---Working on a Chemical Heat Map Header, mostly aesthetics
-(lilly)--->
-    </div>
-		
-    <div class="header">
-<!---Committed image file already (Lilly)--->
-        <div class="bottom">
-        		<img src="header_img.png" alt="Header Image" id="hd_img" style="height:50px; /* Sorry, I added this style temporarily because the image was covering everything else on the page */"> 
-        </div>
-        <div class="top">
-          <h1 id="hd_name">Chemical Heat Map</h1>
-        </div>
-    </div>
-    
-    <div id="heatmap" class="map_image">
-      <h1>Heatmap here</h1>
-    </div>
+    <main class="container">
+      <div class="row">
+        <div id="left-column" class="col-sm-4">
+          <div id="controls">
+            <label for="chemical-name-selector">Choose a chemical:</label>
+            <select name="chemical-name-selector" id="chemical-name-selector">
+              <option selected disabled>---</option>
+            </select>
 
-    
-      <!--button onclick = "myFunction()" class="dropbtn">Dropdown</button-->
-      
-      
+            <br />
+            <label for="chemical-year-selector">Choose a year:</label>
+            <select name="chemical-year-selector" id="chemical-year-selector">
+              <option selected disabled>---</option>
+            </select>
 
-<!---Chemical Dropdown --->
-    
-      
-    <div class="custom" style="width:200px;">
-     	<select name="chemical-name" id="chemical-name-selector">
-        <option selected disabled>Choose a chemical!</option>
-     	</select>
-      <select name="chemical-year" id="chemical-year-selector">
-        <option selected disabled>Choose a year!</option>
-      </select>
-   	</div>
-   
-    
-    <div class="info">
-      <h1>Have information to show up</h1>
-    </div>
+            <br />
+            <button id="make-heatmap-btn">Make Heatmap!</button>
+
+            <br /><br />
+            <label for="zipcode-input">Get data for your zipcode:</label>
+            <input type="number" name="zipcode-input" id="zipcode-input" />
+            <button id="get-zipcode-data-btn">Go!</button>
+          </div>
+
+          <br /><br />
+          <div id="infobox">Chemical Info goes here!</div>
+        </div>
+
+        <div id="right-column" class="col-sm-8">
+          <div id="heatmap"></div>
+        </div>
+      </div>
+    </main>
+
+    <script src="index.js" type="module"></script>
   </body>
-  
-  <script type="module">
-    // comment these two lines out when in syncfiddle, since imports don't work there
-    import { chemicals_data } from "./heatmap/json_data_files/chemicals_data.js";
-    import { make_heatmap } from "./heatmap/heatmap.js";
-
-    main();
-
-    /* // uncomment this only when in syncfiddle, since file imports dont work there
-    async function get_chemicals_data() {
-      const chemicals_data_url = "https://raw.githubusercontent.com/esun780/chem_heatmap.github.io/master/heatmap/output";
-      const fetched_chemicals_data = await fetch(chemicals_data_url);
-			const chemicals_data_json = await fetched_chemicals_data.json();
-      
-      return chemicals_data_json;
-    } 
-    */
-    
-    // pass the actual dropdown obj into here, not its id
-    function make_dropdown_options(options_array, dropdown) {
-      const fragment = new DocumentFragment();
-      
-      // make a new option tag for each option, and add it to the fragment
-      for (const option of options_array) {
-        const new_option = document.createElement("option");
-        new_option.innerText = option;
-        new_option.value = option;
-        
-        fragment.appendChild(new_option);
-      }
-      
-      // add the fragment to the actual dropdown, so the options are visible on the page
-      dropdown.appendChild(fragment);
-    };
-    
-    async function main() {
-      const chemical_name_selector_query = "#chemical-name-selector";
-      const chemical_year_selector_query = "#chemical-year-selector";
-      
-      // uncomment this only when working in syncfiddle (since file imports won't work there)
-      //const chemicals_data = await get_chemicals_data();
-
-      const chemical_names = Object.keys(chemicals_data);
-      const chemical_name_selector = document.querySelector(chemical_name_selector_query);
-      
-      // make the options for the chemical_name dropdown
-      make_dropdown_options(chemical_names, chemical_name_selector);
-      
-      // when user chooses a chemical, fill the year selection dropdown
-      // with the available yearz for the chosen chemical
-      chemical_name_selector.addEventListener("change", () => {
-        const chosen_chemical_name = chemical_name_selector.value;
-        const chosen_chemical_data = chemicals_data[chosen_chemical_name];
-        const chosen_chemical_years = Object.keys(chosen_chemical_data);
-        const chemical_year_selector = document.querySelector(chemical_year_selector_query);
-        
-        // add the available years for the chosen chemical to the years dropdown
-        make_dropdown_options(chosen_chemical_years, chemical_year_selector);
-        
-        // add an event listener that makes a new heatmap when the user
-        // selects a new year for some chemical
-        chemical_year_selector.addEventListener("change", () => {
-          const chosen_chemical_year = chemical_year_selector.value;
-          make_heatmap(chosen_chemical_name, chosen_chemical_year);
-        });
-      });
-    }  	
-  </script>
-  
-
-<style>
-  li {
-  	display: inline; 
-  }
-  li a {
-    display: inline;
-    padding: 14px 16px;
-    text-decoration: none;
-    color: white; 
-    font: Serif; 
-    
-	}
-  
-	li a:hover {
-    background-color: #8F9460;
-	}
-  
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-	}
-
-	ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #05044E;
-	}
-  .navbar {
-  	position: relative;
-  }
-  .bottom {
-  	background: #05044E;
-    z-index: 1;
-    width: 100%;
-  }
-  .top {
-  	background: white;
-  	opacity: .7;
-    z-index: 2;
-    
-  }
-	.top, .bottom {
-		position: absolute;
-	}
-  #hd_img {
-  	color: white;
-  }
-  .map_image {
-  	margin-top: 10px;
-  	float: left;
-  	width: 70%;
-  }
-</style>
-
 </html>
-
-
-
-<!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
-<!--old index.html code below:-->
-
-<!-- <!DOCTYPE html>
-<html lang="en" dir="ltr">
-<title> Michigan Chemical Heatmap </title>
-<link rel="stylesheet" type="text/css" href="css/html5reset.css">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<head>
-<style> 
-.dropbtn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-.dropbtn:hover, .dropbtn:focus {
-  background-color: #3e8e41;
-}
-
-.dropdown {
-  float: right;
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  right: 0;
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown a:hover {background-color: #ddd;}
-</style>
-</head>
-
-<body>
-  
-  
-  <header>
-    <nav>
-        <ul>
-          <li><a href="index.html">Heatmap</a></li>
-          <li>other page links?</li>
-        </ul>
-    </nav>
-  </header>
-  
-  
-  <main>
-    <div class="map_image">
-      <h1> Heatmap here</h1>
-    </div>
-
-    <div class="dropdown">
-  <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-  <div id="myDropdown" class="dropdown-content">
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </div>
-</div>
-<script>
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
-</script>
-
-    </div>
-
-  </main>
-</body>
-
-
-</html> -->
