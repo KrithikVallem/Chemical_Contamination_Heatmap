@@ -1,7 +1,7 @@
 // How To Use
 // 1: run the python scripts from the ecodata github to make all the csv's in a folder called chem_files
 // 2: run this script on the folder of csv's (this file should be on the same level as the folder of csv's, not in the folder itself) 
-//    Make sure to direct the output into the file that you want (node merge_...._object.js > output.json)
+//    Make sure to direct the output into the file that you want (node merge_...._object.js > heatmap/output.json)
 // 2.5: make sure you npm installed the two libraries needed (fs and csv-parse)
 // 3: substitute new geojson for old geojson, and heatmap will automatically update itself
 
@@ -13,8 +13,8 @@ const parse = require('csv-parse/lib/sync');
 
 main()
 
-async function main() {
-    const chemicals_json = await make_chemicals_json();
+function main() {
+    const chemicals_json = make_chemicals_json();
     const zipcodes_json = make_zipcodes_json(chemicals_json);
     
     // replace the json object being printed here so the output file has what you want
@@ -24,7 +24,7 @@ async function main() {
     ));
 }
 
-async function make_chemicals_json() {
+function make_chemicals_json() {
     const chemicals_json = {};
 
     // csv's are stored in the chem_files folder
