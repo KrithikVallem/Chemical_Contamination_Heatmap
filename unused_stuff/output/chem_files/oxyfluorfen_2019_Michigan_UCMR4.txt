@@ -1,2 +1,0 @@
-,CollectionDate,ZIPCODE,AnalyticalResultValue
-0,2019,48195,0.103

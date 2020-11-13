@@ -1,2 +1,0 @@
-,CollectionDate,ZIPCODE,AnalyticalResultValue
-2,2015,48375,0.0001
