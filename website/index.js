@@ -13,6 +13,7 @@ const chemical_year_selector = document.querySelector(
 const make_heatmap_btn = document.querySelector("#make-heatmap-btn");
 const zipcode_input = document.querySelector("#zipcode-input");
 const zipcode_data_btn = document.querySelector("#get-zipcode-data-btn");
+const zipcode_modal = document.querySelector("#zipcode-modal-body");
 const infobox = document.querySelector("#infobox");
 
 main();
@@ -75,11 +76,27 @@ function make_heatmap_btn_function() {
 
 function get_zipcode_data() {
   if (zipcode_input.value in zipcodes_data === false) {
-    alert(
-      "Your zipcode could not be found in our data. You might want to try entering a nearby zipcode."
-    );
+    zipcode_modal.innerHTML =
+      "Your zipcode could not be found in the EPA data. You may want to try entering a nearby zipcode.";
     return;
   }
 
-  alert(JSON.stringify(zipcodes_data[zipcode_input.value]));
+  const data = zipcodes_data[zipcode_input.value];
+  let data_msg = `<strong>Here are all the chemical contamination values we found for the zipcode ${zipcode_input.value}:</strong>`;
+  data_msg += `<br><br>`;
+
+  for (const year in data) {
+    data_msg += `<strong><u>${year}</u></strong>`;
+    data_msg += `<ul>`;
+
+    for (const chemical in data[year]) {
+      data_msg += `<li>${chemical}:
+                    <pre>${data[year][chemical]}</pre>
+                  </li>`;
+    }
+
+    data_msg += `</ul><br>`;
+  }
+
+  zipcode_modal.innerHTML = data_msg;
 }
