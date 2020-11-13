@@ -6,25 +6,15 @@
 // 3: substitute new geojson for old geojson, and heatmap will automatically update itself
 
 // folder with the csv's - change this if the folder name changes
-<<<<<<< HEAD
 const folder_name = `${__dirname}/chem_files`;
-=======
-const folder_name = "chem_files";
->>>>>>> gh-pages
 
 const fs = require('fs');
 const parse = require('csv-parse/lib/sync');
 
 main()
 
-<<<<<<< HEAD
 function main() {
     const chemicals_json = make_chemicals_json();
-=======
-async function main() {
-    const chemicals_json = await make_chemicals_json();
-<<<<<<< HEAD
->>>>>>> 8b446c589bfb5e5e0daaf907631886ae64f44b02
     const zipcodes_json = make_zipcodes_json(chemicals_json);
     
     // replace the json object being printed here so the output file has what you want
@@ -32,9 +22,6 @@ async function main() {
         chemicals_json
         //zipcodes_json
     ));
-=======
-    console.log(JSON.stringify(chemicals_json))
->>>>>>> gh-pages
 }
 
 function make_chemicals_json() {
@@ -71,17 +58,12 @@ function make_chemicals_json() {
                 AnalyticalResultValue: value
             } = row;
 
-<<<<<<< HEAD
             chemicals_json[chemical_name][year][zipcode] = parseFloat(value);
-=======
-            chemicals_json[chemical_name][year][zipcode] = value;
->>>>>>> gh-pages
         })
     }
 
     return chemicals_json;
 }
-<<<<<<< HEAD
 
 function make_zipcodes_json(chemicals_json) {
     const zipcodes_json = {};
@@ -109,5 +91,3 @@ function make_zipcodes_json(chemicals_json) {
 
     return zipcodes_json;
 }
-=======
->>>>>>> gh-pages
