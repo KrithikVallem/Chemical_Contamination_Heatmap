@@ -1,4 +1,4 @@
-## this is intended to replace the second paragraph of the current heatmap description ##
+## this is intended to possibly replace the second paragraph of the current heatmap description ##
 ~~~~~~~~
 While the EPA provides the data for contamination sites and dates for the state of Michigan, the dataset contains hundreds of data points and is difficult to determine the impactful data. To alleviate this issue, we first used Python, through libraries such as Pandas and NumPy, to gather, analyze, and organize the EPA data into structured csv (spreadsheet-ish) files.
 
