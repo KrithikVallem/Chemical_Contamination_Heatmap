@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script merges the master branch (where code is pushed to) with the gh-pages branch (which is what the live website uses)
+# This script pushes code changes to the master branch and then merges the master branch with the gh-pages branch (which is what the live website uses)
 # I got this from https://gist.github.com/mandiwise/44d1edce18f2ffb14f63
 
 # This script can be run using the terminal command below, make sure the path is correct relative to your current terminal location, 
