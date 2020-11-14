@@ -1,7 +1,7 @@
-import { chemicals_data } from "./../heatmap/json_data_files/chemicals_data.js";
-import { zipcodes_data } from "./../heatmap/json_data_files/zipcodes_data.js";
-import { make_heatmap } from "./../heatmap/heatmap.js";
-import { chem_info } from "./../infobox/chem_info.js";
+import { chemicals_data } from "./../../heatmap/json_data_files/chemicals_data.js";
+import { zipcodes_data } from "./../../heatmap/json_data_files/zipcodes_data.js";
+import { make_heatmap } from "./../../heatmap/heatmap.js";
+import { chem_info } from "./../../infobox/chem_info.js";
 
 const no_chemical_or_year_chosen_value = "---";
 const chemical_name_selector = document.querySelector("#chemical-name-selector");
