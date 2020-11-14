@@ -3,8 +3,8 @@
 
 @font-face {
     font-family: 'hussar_ekologicznyregular';
-    src: url('hussarekologiczne1-webfont.woff2') format('woff2'),
-         url('hussarekologiczne1-webfont.woff') format('woff');
+    src: url('./webfontkit-20201105-173809/hussarekologiczne1-webfont.woff2') format('woff2'),
+         url('./webfontkit-20201105-173809/hussarekologiczne1-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -62,7 +62,7 @@ html {
 .contain_header{
     background-image: url('header_img.png');
     background-size: cover;
-    width: %100;
+    width: 100%;
     height: 150px;
     /* center a div insidee another div*/
     display: flex;
@@ -98,4 +98,3 @@ html {
     display: block;
   }
 }
-

@@ -1,3 +1,5 @@
+# This heatmap folder was originally its own repository, which is why theres an index.html and outdated README.md file in here. Feel free to ignore them if you want.
+
 # Chemical Contamination Heatmap
  Chemical Contamination Heatmap for Michigan EcoData
 
