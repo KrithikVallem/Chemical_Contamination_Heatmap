@@ -1,15 +1,11 @@
 import { chemicals_data } from "./../heatmap/json_data_files/chemicals_data.js";
 import { zipcodes_data } from "./../heatmap/json_data_files/zipcodes_data.js";
-import { chem_info } from "./../heatmap/json_data_files/chem_info.js";
 import { make_heatmap } from "./../heatmap/heatmap.js";
+import { chem_info } from "./../infobox/chem_info.js";
 
 const no_chemical_or_year_chosen_value = "---";
-const chemical_name_selector = document.querySelector(
-  "#chemical-name-selector"
-);
-const chemical_year_selector = document.querySelector(
-  "#chemical-year-selector"
-);
+const chemical_name_selector = document.querySelector("#chemical-name-selector");
+const chemical_year_selector = document.querySelector("#chemical-year-selector");
 const make_heatmap_btn = document.querySelector("#make-heatmap-btn");
 const zipcode_input = document.querySelector("#zipcode-input");
 const zipcode_data_btn = document.querySelector("#get-zipcode-data-btn");
@@ -77,7 +73,7 @@ function make_heatmap_btn_function() {
 function get_zipcode_data() {
   if (zipcode_input.value in zipcodes_data === false) {
     zipcode_modal.innerHTML =
-      "Your zipcode could not be found in the EPA data. You may want to try entering a nearby zipcode.";
+      `The zipcode ${zipcode_input.value} could not be found in the EPA data. You may want to try entering a nearby zipcode.`;
     return;
   }
 

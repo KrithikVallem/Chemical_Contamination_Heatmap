@@ -1,7 +1,7 @@
 // How to use:
-// 1. Make sure the Chem_Info is in the heatmap folder, or else change the code to get the right path to it
+// 1. Make sure the Chem_Info is in the infobox folder, or else change the code to get the right path to it
 // 2: run this script on the folder of csv's (this file should be on the same level as the folder of csv's, not in the folder itself) 
-//    Make sure to direct the output into the file that you want (node merge_...._object.js > heatmap/output.json)
+//    Make sure to direct the output into the file that you want (node merge_...._object.js > infobox/output.json)
 // 2.5: make sure you npm installed the libraries needed (fs)
 // 3: enjoy!
 // folder with the csv's - change this if the folder name changes
