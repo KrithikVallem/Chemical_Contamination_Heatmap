@@ -1,7 +1,7 @@
 // This script takes in an array of objects representing each team member, and spits out html that should go in about.html
 // run script like so:
 // node [this file's name/path, without the brackets] > [output file name, without the brackets]
-// make sure you've npm installed the needed libraries
+// make sure you've npm installed the needed libraries (fs and csv-parse/lib/sync)
 
 const inputFileFormat = "csv"; // change to "json" if you have json
 const inputFilePath = ""; // use the correct path here relative to this file
@@ -33,6 +33,7 @@ function generateHTML(peopleJSON) {
     <head>
         <title> About Us </title>
         <link rel="stylesheet" type="text/css" href="chem_test_style.css">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0"> <!-- This fixes the bug that made the cards not wrap into a single column on small screens -->
     </head>
     <body>
     <!--Add nav_bar or just back button?-->
