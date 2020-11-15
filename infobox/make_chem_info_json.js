@@ -12,12 +12,14 @@ const fs = require('fs');
 main()
 
 function main() {
-    const chem_info_json = make_chem_info();
+    let chem_info_json = make_chem_info();
+    chem_info_json = JSON.stringify(chem_info_json);
 
+    // use output redirection in the terminal to dump this into the file you use as the source for the website's chem_info
     console.log(
-        JSON.stringify(
-            chem_info_json
-        )
+`// this was json but I made is .js so I could import it instead of fetching it :: remove lines 1 and 2 to turn back into valid json
+export const chem_info =
+${chem_info_json}`
     )
 }
 
@@ -35,5 +37,28 @@ function make_chem_info() {
         chem_info[chemical_name] = file_content;
     }
 
+    delete chem_info[""]; // delete the weird empty property that occurs sometimes
+
     return chem_info;
+}
+
+// for now, this just turns {1} into a superscript <sup>, and replaces \n newlines with <br>
+// untested, not sure if this works
+function make_chem_info_html(chem_info) {
+    const chem_info_html = {};
+
+    for (const chemical in chem_info) {
+        let text = chem_info[chemical];
+        text = text.trim().replaceAll(`\n`, `<br>`);
+
+        let firstLine = text.split("<br>")[0];
+        firstLine = firstLine.replaceAll("{", "<sup>").replaceAll("}", "</sup");
+
+        let notFirstLine = text.split("<br>").slice(1).join("<br>");
+
+        const html = firstLine + "<br>" + notFirstLine;
+        chem_info_html[chemical] = html;
+    }
+
+    return chem_info_html;
 }
