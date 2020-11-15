@@ -20,7 +20,7 @@ We obtained the data for this website by gathering and analyzing 400,000+ public
 * Figure out if there are units for the chemical contamination values, and add those in to heatmap and zipcode summary modal
 * Look over and finalize the main project description - Note: Some of the technical details behind how the website and heatmap works are misleading, so fix if needed - Heatmap_Tech_Details.txt
 * Add a link to the live website on the EcoData website, at the very top of the project description <--- VERY IMPORTANT
-* Add in the about page stuff (including header link!!!) and put everyone's faces and descriptions onto it
+* Add in the about page stuff (including header link!!!) and put everyone's faces and descriptions onto it, and add a back button or something to go back to project
 ---
 Stuff that can be done after meeting, but need an opinion on during meeting:
 * : Update the README.md file to remove this todo section

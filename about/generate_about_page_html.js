@@ -64,6 +64,8 @@ function generateHTML(peopleJSON) {
         </div>
     </body>
     `;
+
+    return template;
 }
 
 function main() {
@@ -81,5 +83,6 @@ function main() {
     }
 
     fileContent = renameProperties(fileContent);
-    generateHTML(fileContent);
+    const html = generateHTML(fileContent);
+    console.log(html);
 }
