@@ -17,7 +17,7 @@
 # Reference: http://lea.verou.me/2011/10/easily-keep-gh-pages-in-sync-with-master/
 git add .
 git status # to see what changes are going to be commited
-git commit -m "${1:-'no commit message provided'}" # $1 is the first command line argument (bash push_and_merge.sh "My Commit Message") -> My Commit Message" is $1
+git commit -m "${1:-no commit message provided}" # $1 is the first command line argument (bash push_and_merge.sh "My Commit Message") -> My Commit Message" is $1
 git push origin master
 
 git checkout gh-pages # go to the gh-pages branch
