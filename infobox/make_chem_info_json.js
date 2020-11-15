@@ -44,6 +44,7 @@ function make_chem_info() {
 
 // for now, this just turns {1} into a superscript <sup>, and replaces \n newlines with <br>
 // untested, not sure if this works
+// no longer needed since plain text is fine, and easier to edit in the future
 function make_chem_info_html(chem_info) {
     const chem_info_html = {};
 
