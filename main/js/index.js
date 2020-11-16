@@ -7,6 +7,7 @@ const no_chemical_or_year_chosen_value = "---";
 const chemical_name_selector = document.querySelector("#chemical-name-selector");
 const chemical_year_selector = document.querySelector("#chemical-year-selector");
 const make_heatmap_btn = document.querySelector("#make-heatmap-btn");
+const loading_spinner = document.querySelector("#loading-spinner");
 const zipcode_input = document.querySelector("#zipcode-input");
 const zipcode_data_btn = document.querySelector("#get-zipcode-data-btn");
 const zipcode_modal = document.querySelector("#zipcode-modal-body");
@@ -64,7 +65,9 @@ function make_heatmap_btn_function() {
     alert("Error! Please choose a valid chemical/year!");
     return;
   }
-
+  // spinner class creates the spinner
+  loading_spinner.classList.add("spinner");
+  
   make_heatmap(chemical_name_selector.value, chemical_year_selector.value);
 
   infobox.innerText = chem_info[chemical_name_selector.value];

@@ -9,8 +9,11 @@ const CONSTANTS = {
     // any css-compatible colors work here, but the chroma color scales can be found at https://colorbrewer2.org/
     lowest: chroma.brewer.PuRd[0], // used for default map background (0 contaminants found)
     highest: chroma.brewer.PuRd[chroma.brewer.PuRd.length - 1], // used for the highest contaminant amount across all zipcodes
-    border: chroma.brewer.PuRd[1]
-  }
+    border: chroma.brewer.PuRd[1],
+    hover_border: "violet" // only applies to zipcodes with data attached to them
+  },
+  heatmap_id: "heatmap",
+  loading_spinner_id: "loading-spinner",
 };
 
 // zingcharts does the heavy lifting, I just provide it with the data to display
@@ -18,11 +21,7 @@ const CONSTANTS = {
 // the chemical_name and year are only passed in here to make the heatmap title, they won't change the heatmap's data
 // you need to pass the new chemical_name and year into the get_heatmap_colors function to change the actual heatmap
 // added an optional geojson_path parameter so html files not in the main global folder (which will thus have different paths for the geojson) can still use make_heatmap
-export function make_heatmap(
-  chemical_name,
-  year,
-  geojson_path = CONSTANTS.geojson_path
-) {
+export function make_heatmap(chemical_name, year, geojson_path = CONSTANTS.geojson_path) {
   const styles_json = get_heatmap_colors(chemicals_data, chemical_name, year);
 
   zingchart.maps.loadGeoJSON({
@@ -39,14 +38,14 @@ export function make_heatmap(
       //Optional styling options
       poly: {
         label: {
-          visible: false
+          visible: false // hides zipcode labels from showing up by default
         }
       }
     },
     callback: function () {
       // Function called when GeoJSON is loaded
       zingchart.render({
-        id: "heatmap",
+        id: CONSTANTS.heatmap_id,
         data: {
           title: {
             text: `${chemical_name} ${year}`,
@@ -64,7 +63,7 @@ export function make_heatmap(
                   backgroundColor: CONSTANTS.colors.lowest,
                   borderColor: CONSTANTS.colors.border,
                   label: {
-                    visible: false
+                    visible: false // hides zipcode labels from showing up by default
                   },
                   controls: {
                     placement: "tr" // on mobile, the default top left placement (tl) overlaps the hamburger menu
@@ -75,6 +74,10 @@ export function make_heatmap(
           ]
         }
       });
+
+      // remove spinner once heatmap is rendered
+      const loading_spinner = document.getElementById(CONSTANTS.loading_spinner_id);
+      loading_spinner.classList.remove("spinner");
     }
   });
 }
@@ -93,9 +96,7 @@ export function get_heatmap_colors(chemicals_data, chemical_name, year) {
     chemical_data_in_year[key] = parseFloat(chemical_data_in_year[key]);
   }
 
-  const highest_contamination_value = Math.max(
-    ...Object.values(chemical_data_in_year)
-  );
+  const highest_contamination_value = Math.max(...Object.values(chemical_data_in_year));
   const contamination_data_pairs = Object.entries(chemical_data_in_year);
 
   for (const [zipcode, value] of contamination_data_pairs) {
@@ -109,7 +110,7 @@ export function get_heatmap_colors(chemicals_data, chemical_name, year) {
     styles_json[zipcode] = {
       backgroundColor: bg_color,
       "hover-state": {
-        "border-color": "#e0e0e0", // todo, change this to some variable
+        "border-color": CONSTANTS.colors.hover_border,
         "border-width": 2,
         "background-color": bg_color
       },
