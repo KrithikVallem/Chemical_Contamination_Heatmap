@@ -63,7 +63,8 @@ function generateHTML(peopleJSON) {
 
     template += `
         </div>
-    </body>
+      </body>
+    </html>
     `;
 
     return template;
