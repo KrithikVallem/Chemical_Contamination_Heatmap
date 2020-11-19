@@ -4,6 +4,7 @@ import { make_heatmap } from "./../../heatmap/heatmap.js";
 import { chem_info } from "./../../infobox/chem_info.js";
 
 const no_chemical_or_year_chosen_value = "---";
+const data_units = "µg/L";
 const chemical_name_selector = document.querySelector("#chemical-name-selector");
 const chemical_year_selector = document.querySelector("#chemical-year-selector");
 const make_heatmap_btn = document.querySelector("#make-heatmap-btn");
@@ -81,8 +82,10 @@ function get_zipcode_data() {
   }
 
   const data = zipcodes_data[zipcode_input.value];
-  let data_msg = `<strong>Here are all the chemical contamination values we found for the zipcode ${zipcode_input.value}:</strong>`;
-  data_msg += `<br><br>`;
+  let data_msg = `<strong>Here are all the chemical contamination values we found for the zipcode ${zipcode_input.value}:</strong>
+                  <br><br>
+                  <div>All values are in <code>${data_units}</code></div>
+                  <br>`;
 
   for (const year in data) {
     data_msg += `<strong><u>${year}</u></strong>`;

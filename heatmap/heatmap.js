@@ -14,6 +14,7 @@ const CONSTANTS = {
   },
   heatmap_id: "heatmap",
   loading_spinner_id: "loading-spinner",
+  data_units: "µg/L",
 };
 
 // zingcharts does the heavy lifting, I just provide it with the data to display
@@ -116,7 +117,7 @@ export function get_heatmap_colors(chemicals_data, chemical_name, year) {
       },
       tooltip: {
         // the thing that shows up on hover
-        text: `${zipcode}<br>${value}`
+        text: `${zipcode}<br>${value} ${CONSTANTS.data_units}`
       }
     };
   }
