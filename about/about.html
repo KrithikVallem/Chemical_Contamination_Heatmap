@@ -2,28 +2,35 @@
         <!DOCTYPE html>
             <html lang="en">
             <head>
-                <title> About Us </title>
+                <title>About Us</title>
                 <link rel="stylesheet" type="text/css" href="chem_test_style.css">
                 <meta name="viewport" content="width=device-width,initial-scale=1.0"> <!-- This fixes the bug that made the cards not wrap into a single column on small screens -->
             </head>
             <body>
             <!--Add nav_bar or just back button?-->
-
+<!--
             <header class="nav">
                 <a class="logo"> CHEMICAL HEAT MAP </a>
                 <a href="https://umecodata.github.io/website/" id="button"> ECODATA </a>
                 <a id="button" href="../index.html"> MAP </a>
             </header>
+-->
 
             <div class="about_hdr">
-                <h1> About The Members </h1>
-                <p> Short summary about our work </p>
+                <h1>About Us</h1>
+                <p>We built an interactive heatmap to let you easily view chemical contaminants near you!</p>
+
+                <header class="nav">
+                  <a id="button" href="../index.html"><u>[HEATMAP]</u></a>
+                  <a href="https://umecodata.github.io/website/" id="button"><u>[ECODATA]</u></a>
+                </header>
+
         <!---This page should be responsive--->
             </div>
     <div class="row">
         <div class="column">
 			<div class="card">
-				<img src="LillyWu.png" alt="Lilly Wu" style="width: 100%">
+				<img src="headshots/Lilly Wu.png" alt="Lilly Wu" style="width: 100%">
 				<div class="container_about">
 					<h2>Lilly Wu</h2>
 					<p class="title">Sophomore in LSA–Residential College</p>
@@ -34,7 +41,7 @@
     
             <div class="column">
                 <div class="card">
-                    <img src="https://drive.google.com/u/0/open?usp=forms_web&id=1zDa8K56OItuyFuaNIgDeqncMYWBcJ8J7" alt="Krithik Vallem" style="width: 100%">
+                    <img alt="Krithik Vallem" style="width: 100%" src="headshots/Krithik Vallem.jpg">
                     <div class="container_about">
                         <h2>Krithik Vallem</h2>
                         <p class="title">Class of 2022<br>Computer Science</p>
@@ -48,7 +55,7 @@
             
             <div class="column">
                 <div class="card">
-                    <img src="https://drive.google.com/u/0/open?usp=forms_web&id=1BYAVKrHnDbThzD2ICOG9If9a7qc2C8-q" alt="Emily Sun" style="width: 100%">
+                    <img alt="Emily Sun" style="width: 100%" src="headshots/Emily Sun.jpg">
                     <div class="container_about">
                         <h2>Emily Sun</h2>
                         <p class="title">Junior<br>Major: Industrial and Operations Engineering, Minor: Mathematics </p>
@@ -62,7 +69,7 @@
             
             <div class="column">
                 <div class="card">
-                    <img src="https://drive.google.com/u/0/open?usp=forms_web&id=1g9_56dMXCm1cwpYfKv0WT6FNl6g7x7rg" alt="Pranav Balachander" style="width: 100%">
+                    <img alt="Pranav Balachander" style="width: 100%" src="headshots/Pranav Balachander.jpg">
                     <div class="container_about">
                         <h2>Pranav Balachander</h2>
                         <p class="title">Class of 2024<br>Majors: Molecular, Cellular, and Developmental Biology & Ecology, Evolution, and Biodiversity Minors: Statistics and Music (not 100% sure yet)</p>
@@ -76,10 +83,15 @@
             </div>
 
     
-        <div>
-            <strong>Other Contributors:</strong>
-            <ul>
-                <li>Jiyang Zhou</li>
+        <div class="column">
+            <div class="card">
+                <div class="container_about">
+
+                    <br><!-- for extra vertical space since theres no image padding -->
+
+                    <h2>Other Contributors:</h2>
+                    <ul>
+                        <li>Jiyang Zhou</li>
 <li>Lily Zhai</li>
 <li>Adam Mentzer</li>
 <li>Madeline Richards</li>
@@ -88,7 +100,9 @@
 <li>Daniel Schenider</li>
 <li>Keerthi Sajja</li>
 <li>Michael Yufa-Zimilevich</li>
-            </ul>
+                    </ul>
+                </div>
+            </div>
         </div>
       </body>
     </html>
