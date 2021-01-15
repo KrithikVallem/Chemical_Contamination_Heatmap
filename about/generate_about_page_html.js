@@ -6,7 +6,7 @@
 // make sure to add the headshot to the headshots folder, and don't use the direct link to the drive image
 // rename all images to the <Google Form person name>.jpg format (change the ending to a jpg regardless of image type)
 
-const inputFilePath = `${__dirname}/Chemical Heatmap About Page Submissions .csv`; // use the correct path here relative to your terminal location
+const inputFilePath = `${__dirname}/Chemical Heatmap About Page Submissions.csv`; // use the correct path here relative to your terminal location
 function renameProperties(json) {
     // rename the properties to match what the html template uses, the original property names are from the google form questions
     return json.map(person => (
@@ -65,26 +65,12 @@ function generateHTML(peopleJSON) {
 
     template += `<div class="row">`
 
-    // Lilly Wu is hardcoded in because she originally made the about page and never submitted the google form, so isn't in the csv data
-    template += `
-        <div class="column">
-			<div class="card">
-				<img src="headshots/Lilly Wu.png" alt="Lilly Wu" style="width: 100%">
-				<div class="container_about">
-					<h2>Lilly Wu</h2>
-					<p class="title">Sophomore in LSA–Residential College</p>
-					<p>descriptive text</p>
-				</div>
-			</div>
-		</div>
-    `
-
     // generate card for each person who filled out google form
     for (const person of peopleJSON) {
         template += `
             <div class="column">
                 <div class="card">
-                    <img alt="${person.name}" style="width: 100%" src="headshots/${person.name}.jpg">
+                    <img alt="${person.name}" style="width: 100%" src="headshots/${person.name}.jpg"> <!-- rename .png images to have a .jpg extension -->
                     <div class="container_about">
                         <h2>${person.name}</h2>
                         <p class="title">${person.gradYearOrClassStanding}<br>${person.majorAndMinor}</p>
@@ -97,11 +83,6 @@ function generateHTML(peopleJSON) {
             </div>
             `;
     }
-
-    template += `</div>
-
-    `;
-
 
     // generate basic list for people who didn't fill out google form
     template += `
@@ -125,6 +106,7 @@ function generateHTML(peopleJSON) {
 
 
     template += `
+        </div> <!-- ends the div[class="row"] -->
       </body>
     </html>
     `;
